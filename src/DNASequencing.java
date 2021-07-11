@@ -1,12 +1,7 @@
 import javax.swing.*;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +22,7 @@ public class DNASequencing extends JFrame {
      static int gap=0;
      private List<List<Cell>> m;
      private String sequ1,sequ2;
+     private  boolean c =true;
 
 
     public DNASequencing(){
@@ -58,8 +54,9 @@ public class DNASequencing extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Table t = new Table(m,sequ1,sequ2);
-                t.setVisible(true);
+                ScoreMatrix ma = new ScoreMatrix(m,sequ1,sequ2);
+                ScoreMatrix.Companion.getF().setVisible(false);
+                ma.showMatrix();
             }
 
         });
