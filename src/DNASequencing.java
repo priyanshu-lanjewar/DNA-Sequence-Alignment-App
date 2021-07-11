@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +20,7 @@ public class DNASequencing extends JFrame {
      static int gap=0;
      private List<List<Cell>> m;
      private String sequ1,sequ2;
-     private  boolean c =true;
+
 
 
     public DNASequencing(){
@@ -43,22 +41,15 @@ public class DNASequencing extends JFrame {
             m = AlignmentCall.Companion.getMatrix();
 
         });
-        configButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Configure cf = new Configure(sim,notSim,gap);
-                cf.setVisible(true);
-            }
+        configButton.addActionListener(e -> {
+            Configure cf = new Configure(sim,notSim,gap);
+            cf.setVisible(true);
         });
-        tableButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        tableButton.addActionListener(e -> {
 
-                ScoreMatrix ma = new ScoreMatrix(m,sequ1,sequ2);
-                ScoreMatrix.Companion.getF().setVisible(false);
-                ma.showMatrix();
-            }
-
+            ScoreMatrix ma = new ScoreMatrix(m,sequ1,sequ2);
+            ScoreMatrix.Companion.getF().setVisible(false);
+            ma.showMatrix();
         });
     }
 

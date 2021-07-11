@@ -2,49 +2,41 @@ import java.util.*
 import javax.swing.*
 
 
-class ScoreMatrix{
-    lateinit var array: Array<Array<Any?>>
-    lateinit var col: Array<String?>
-    lateinit var matrix: MutableList<MutableList<Cell>>
-    lateinit var Seq1: String
-    lateinit var Seq2: String
+class ScoreMatrix(
+    matrix: MutableList<MutableList<Cell>>,
+    private var Seq1: String,
+    private var Seq2: String
+) {
+    private var array: Array<Array<Any?>> = Array(Seq2.length) { arrayOfNulls(Seq1.length + 1) }
+    private var col: Array<String?>
+
     companion object{
         var f=JFrame()
     }
 
-    constructor(){
-
-    }
-    constructor(matrix:MutableList<MutableList<Cell>>, Seq1:String,Seq2:String){
-        this.matrix = matrix
-        this.Seq1=Seq1
-        this.Seq2 = Seq2
-        array = Array(Seq2.length) { arrayOfNulls(Seq1.length + 1) }
-
+    init {
         for (i in array.indices) {
-            array[i][0] = Seq2.get(i)
+            array[i][0] = Seq2[i]
         }
-
         for (i in array.indices) {
 
             for (j in 1 until array[0].size) {
-                array[i][j] = matrix.get(i).get(j - 1).cellScore
+                array[i][j] = matrix[i][j - 1].cellScore
 
             }
         }
         col = arrayOfNulls(Seq1.length+1)
         for (i in Seq1.indices) {
-            col[i+1] = Seq1.get(i).toString()
+            col[i+1] = Seq1[i].toString()
         }
         col[0]="*"
-
     }
     fun showMatrix(){
         val icn = ImageIcon(Objects.requireNonNull(this.javaClass.getResource("dna.png")))
         f = JFrame("Score Matrix")
         f.iconImage = icn.image
         val t =  JTable(array,col)
-        val s = JScrollPane(t);
+        val s = JScrollPane(t)
         var w=26*(1+Seq1.length)
         var h=26*(1+Seq2.length)
         if(w>500 || h>500){
@@ -54,7 +46,7 @@ class ScoreMatrix{
         }
         f.setSize(w,h)
 
-        f.add(s);
+        f.add(s)
         f.setLocationRelativeTo(null)
         f.isVisible=true
     }

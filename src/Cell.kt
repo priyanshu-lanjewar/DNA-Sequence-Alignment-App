@@ -1,36 +1,23 @@
 class Cell {
 
     private var prevCell : Cell? = null
-    private var prevCells = mutableListOf<Cell?>()
     private var row=0
     private var col=0
     private var scr=0
-    enum class PrevCellType { Left, Above, Diagonal };
+    enum class PrevCellType { Left, Above, Diagonal }
+
     private var cellType:PrevCellType? = null
-    constructor(){
-
-    }
-    constructor(row:Int,col:Int) {
-        this.col = col;
-        this.row = row;
-
-    }
+    constructor()
     constructor(row:Int,col:Int, scr:Int) {
-        this.col = col;
-        this.row = row;
+        this.col = col
+        this.row = row
         this.scr = scr
 
     }
-    constructor(row:Int,col:Int, scr:Int, prevCell:Cell) {
-        this.col = col;
-        this.row = row;
-        this.scr = scr
-        this.prevCell = prevCell
 
-    }
     constructor(row:Int,col:Int, scr:Int, prevCell:Cell,cellType:PrevCellType) {
-        this.col = col;
-        this.row = row;
+        this.col = col
+        this.row = row
         this.scr = scr
         this.prevCell = prevCell
         this.cellType = cellType
@@ -40,12 +27,6 @@ class Cell {
         get() = this.prevCell
         set(value){
             this.prevCell = value
-        }
-
-    var PrevCellPointer: MutableList<Cell?>
-        get() = this.prevCells
-        set(value){
-            this.prevCells = value
         }
 
     var cellScore:Int
